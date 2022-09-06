@@ -52,9 +52,12 @@ export default function Home() {
                   <td>{task.tags}</td>
                   <td>{task.createTime}</td>
                   <td>
-                    <button className="btn btn-primary mx-1">
+                    <Link
+                      className="btn btn-primary mx-1"
+                      to={`/viewtask/${task.id}`}
+                    >
                       <GrFormView />
-                    </button>
+                    </Link>
                     <Link
                       className="btn btn-outline-primary mx-1"
                       to={`/edittask/${task.id}`}
