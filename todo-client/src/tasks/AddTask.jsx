@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import "./AddTask.css";
 
 export default function AddTask() {
+  const [task, setTask] = useState({
+    title: "",
+    tags: "",
+    description: "",
+  });
+
+  const { title, tags, description } = task;
+
+  const onInputChange = (e) => {
+    setTask({ ...task, [e.target.name]: e.target.value });
+  };
+
   return (
     <div className="container" id="login-container">
       <div className="image"></div>
@@ -12,52 +24,38 @@ export default function AddTask() {
             <label for="title">Title of task</label>
             <input
               type={"text"}
+              name="title"
               className="form-control mb-4"
               placeholder="enter the name of the task"
+              value={title}
+              onChange={(e) => onInputChange(e)}
             />
           </div>
 
-          <div className="form-group mb-4">
+          <div className="form-group mb-5">
             <label for="description">Description</label>
             <textarea
               type={"text"}
+              name="description"
               className="form-control"
               placeholder="enter a description"
+              value={description}
+              onChange={(e) => onInputChange(e)}
             />
           </div>
 
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type={"radio"}
+          <div className="dropdown mb-4">
+            <label className="btn-light disabled mx-3">Urgency : </label>
+            <select
+              className="btn btn-outline-secondary dropdown-toggle"
+              value={tags}
               name="tags"
-              value="Urgent"
-            />
-            <label class="form-check-label" for="Urgent">
-              Urgent
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type={"radio"}
-              name="tags"
-              value="Medium"
-            />
-            <label class="form-check-label" for="Medium">
-              Medium
-            </label>
-          </div>
-          <div class="form-check mb-4">
-            <input
-              class="form-check-input"
-              type={"radio"}
-              name="tags"
-              value="Minor"
-            />
-            <label class="form-check-label" for="Minor">
-              Minor
-            </label>
+              onChange={(e) => onInputChange(e)}
+            >
+              <option value="Urgent">Urgent</option>
+              <option value="Medium">Medium</option>
+              <option value="Minor">Minor</option>
+            </select>
           </div>
 
           <div className="form-group">
