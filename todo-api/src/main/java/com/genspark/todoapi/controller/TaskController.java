@@ -33,4 +33,15 @@ public class TaskController {
         return taskRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
+
+    @PutMapping("/task/{id}")
+    Task updateTask(@RequestBody Task newTask, @PathVariable Long id) {
+        return taskRepository.findById(id)
+                .map(task -> {
+                    task.setTitle(newTask.getTitle());
+                    task.setTags(newTask.getTags());
+                    task.setDescription(newTask.getDescription());
+                    return taskRepository.save(task);
+                }).orElseThrow(() -> new UserNotFoundException(id));
+    }
 }
