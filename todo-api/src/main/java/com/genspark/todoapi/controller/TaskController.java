@@ -44,4 +44,14 @@ public class TaskController {
                     return taskRepository.save(task);
                 }).orElseThrow(() -> new UserNotFoundException(id));
     }
+
+    @DeleteMapping("/task/{id}")
+    String deleteUser(@PathVariable Long id) {
+        if(!taskRepository.existsById(id)) {
+            throw new UserNotFoundException(id);
+        }
+
+        taskRepository.deleteById(id);
+        return id+ " has been deleted";
+    }
 }
