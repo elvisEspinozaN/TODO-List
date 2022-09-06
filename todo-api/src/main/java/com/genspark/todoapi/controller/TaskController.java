@@ -1,5 +1,6 @@
 package com.genspark.todoapi.controller;
 
+import com.genspark.todoapi.exception.UserNotFoundException;
 import com.genspark.todoapi.model.Task;
 import com.genspark.todoapi.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,11 @@ public class TaskController {
     @GetMapping("/tasks")
     List<Task> getAllTasks() {
         return taskRepository.findAll();
+    }
+
+    @GetMapping("/task/{id}")
+    Task getUserById(@PathVariable Long id) {
+        return taskRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
     }
 }
