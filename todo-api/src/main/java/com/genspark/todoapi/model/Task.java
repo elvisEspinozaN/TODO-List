@@ -1,9 +1,10 @@
 package com.genspark.todoapi.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import org.hibernate.annotations.CreationTimestamp;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @author elvisespinoza
@@ -17,6 +18,8 @@ public class Task {
     private String title;
     private String tags;
     private String description;
+    @Column(nullable = false, updatable = false)
+    @CreationTimestamp
     private LocalDateTime createTime;
 
     public Long getId() {
