@@ -1,7 +1,11 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./AddTask.css";
 
 export default function AddTask() {
+  let navigate = useNavigate();
+
   const [task, setTask] = useState({
     title: "",
     tags: "",
@@ -14,12 +18,19 @@ export default function AddTask() {
     setTask({ ...task, [e.target.name]: e.target.value });
   };
 
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    await axios.post("http://localhost:8080/task", task);
+    navigate("/");
+  };
+
   return (
     <div className="container" id="login-container">
       <div className="image"></div>
       <div className="frm">
         <h3>Create a task</h3>
-        <form>
+
+        <form onSubmit={(e) => onSubmit(e)}>
           <div className="form-group">
             <label for="title">Title of task</label>
             <input
@@ -62,12 +73,9 @@ export default function AddTask() {
             <button type="submit" className="btn btn-outline-success btn-lg">
               Submit
             </button>
-            <button
-              type="submit"
-              className="btn btn-outline-danger btn-lg mx-2"
-            >
+            <Link className="btn btn-outline-danger btn-lg mx-2" to="/">
               Cancel
-            </button>
+            </Link>
           </div>
         </form>
       </div>
