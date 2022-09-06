@@ -3,6 +3,7 @@ import axios from "axios";
 import { GrFormView } from "react-icons/gr";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { AiOutlineEdit } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [tasks, setTasks] = useState([]); // empty array init
@@ -47,9 +48,12 @@ export default function Home() {
                     <button className="btn btn-primary mx-1">
                       <GrFormView />
                     </button>
-                    <button className="btn btn-outline-primary mx-1">
+                    <Link
+                      className="btn btn-outline-primary mx-1"
+                      to={`/edittask/${task.id}`}
+                    >
                       <AiOutlineEdit />
-                    </button>
+                    </Link>
                     <button className="btn btn-danger mx-1">
                       <RiDeleteBin5Line />
                     </button>

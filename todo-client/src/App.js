@@ -4,6 +4,7 @@ import Navbar from "./layout/Navbar";
 import Home from "./pages/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AddTask from "./tasks/AddTask";
+import EditTask from "./tasks/EditTask";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/addtask" element={<AddTask />} />
+          <Route exact path="/edittask/:id" element={<EditTask />} />
         </Routes>
       </Router>
     </div>
